@@ -125,21 +125,26 @@ nav a:hover{color:var(--gold);}
   display: block; opacity: 1; transform: translateY(0); pointer-events: all;
 }
 
-.u-map { 
-  background: #fff; 
-  border-radius: 12px; 
-  padding: 40px 30px; /* This adds the extra "air" around the map */
-  box-shadow: 0 20px 50px rgba(0,0,0,0.08); 
-  border: 1px solid rgba(196, 151, 58, 0.2); 
-  width: 100%; 
-  overflow-x: auto; 
-}
-.u-grid { display: grid; grid-template-columns: 1fr 1.2fr 1fr; gap: 12px; min-width: 280px; }
-.map-table { background: var(--ivory); border: 1px solid rgba(196,151,58,0.3); border-radius: 6px; padding: 12px 5px; text-align: center; font-size: 10px; text-transform: uppercase; letter-spacing: 1px; color: var(--muted); transition: all 0.4s; position: relative; display: flex; align-items: center; justify-content: center; }
-.map-top-table { grid-column: 1 / -1; margin-bottom: 12px; padding: 18px 5px; background: var(--cream);}
-.map-side-tables { display: flex; flex-direction: column; gap: 10px; }
+/* ── UPDATED SEATING STYLES ── */
+.u-map { background: #fff; border-radius: 12px; padding: 40px 30px; box-shadow: 0 20px 50px rgba(0,0,0,0.08); border: 1px solid rgba(196, 151, 58, 0.2); width: 100%; overflow-x: auto; }
+.u-grid { display: grid; grid-template-columns: 1fr 1.2fr 1fr; gap: 15px; min-width: 280px; }
+
+.table-pair { display: flex; gap: 2px; margin-bottom: 10px; width: 100%; }
+
+.map-table { background: var(--ivory); border: 1px solid rgba(196,151,58,0.3); border-radius: 4px; padding: 12px 5px; text-align: center; font-size: 9px; text-transform: uppercase; letter-spacing: 1px; color: var(--muted); transition: all 0.4s; display: flex; align-items: center; justify-content: center; flex: 1; }
+
+.map-top-table { grid-column: 1 / -1; margin-bottom: 12px; padding: 18px 5px; background: var(--cream); border-radius: 6px;}
+.map-side-tables { display: flex; flex-direction: column; }
+
+.half-out { border-radius: 6px 2px 2px 6px; }
+.half-in { border-radius: 2px 6px 6px 2px; }
+
+/* Right side rounding flipped */
+.r-side .half-in { border-radius: 6px 2px 2px 6px; }
+.r-side .half-out { border-radius: 2px 6px 6px 2px; }
+
 .map-dancefloor { display: flex; align-items: center; justify-content: center; font-family: 'Great Vibes', cursive; font-size: clamp(22px, 5vw, 34px); color: var(--gold-l); opacity: 0.6; text-align: center; line-height: 1; }
-.map-table.active { background: var(--gold); border-color: var(--gold); color: #fff; box-shadow: 0 5px 20px rgba(196, 151, 58, 0.5); transform: scale(1.08); z-index: 2; font-weight: 500; }
+.map-table.active { background: var(--gold); border-color: var(--gold); color: #fff; box-shadow: 0 5px 20px rgba(196, 151, 58, 0.5); transform: scale(1.05); z-index: 2; font-weight: 500; }
 
 @media(max-width:760px){
   nav{gap:15px;padding:12px 15px;}
@@ -147,32 +152,18 @@ nav a:hover{color:var(--gold);}
   .luxe-program { padding: 40px 20px; }
   .v-time { padding-right: 15px; font-size: 18px; }
   .v-content { padding-left: 15px; }
-
-  /* Pulls the tables in by reducing the dance floor area and using flexible fractions */
-  .u-grid { 
-    grid-template-columns: 1fr 0.8fr 1fr; 
-    gap: 8px; 
-  }
-
-  /* Shrinks the table buttons to create visual "space" */
+  
+  .u-grid { grid-template-columns: 1fr 0.7fr 1fr; gap: 10px; }
+  .table-pair { margin-bottom: 6px; }
+  
   .map-table {
-    font-size: 8px;
-    padding: 8px 2px;
+    font-size: 7.5px;
+    padding: 8px 1px;
     letter-spacing: 0.5px;
   }
-
-  /* Reduces the height of the top table */
-  .map-top-table {
-    padding: 12px 5px;
-    margin-bottom: 8px;
-  }
   
-  /* Makes the script text smaller and more subtle */
-  .map-dancefloor {
-    display: flex;
-    font-size: 16px;
-    opacity: 0.4;
-  }
+  .map-top-table { padding: 12px 5px; margin-bottom: 8px; }
+  .map-dancefloor { font-size: 16px; opacity: 0.4; }
 }
 </style>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
@@ -332,7 +323,6 @@ nav a:hover{color:var(--gold);}
       <div class="autocomplete-list" id="autocomplete-list"></div>
     </div>
 
-    <!-- V14 Wrapped result structure -->
     <div class="seating-result-wrapper" id="seating-result">
       <div id="guest-found" style="text-align:center; margin-bottom:24px; font-family:'Cormorant Garamond'; font-size:24px;">
         Welcome, <b id="guest-name-display"></b>!<br>
@@ -342,26 +332,29 @@ nav a:hover{color:var(--gold);}
       <div class="u-map">
         <div class="u-grid">
           <div class="map-table map-top-table" id="table-top">Top Table</div>
-          <div class="map-side-tables">
-            <div class="map-table" id="table-l1">Left 1</div>
-            <div class="map-table" id="table-l2">Left 2</div>
-            <div class="map-table" id="table-l3">Left 3</div>
-            <div class="map-table" id="table-l4">Left 4</div>
-            <div class="map-table" id="table-l5">Left 5</div>
-            <div class="map-table" id="table-l6">Left 6</div>
-            <div class="map-table" id="table-l7">Left 7</div>
-            <div class="map-table" id="table-l8">Left 8</div>
+          
+          <div class="map-side-tables l-side">
+            <div class="table-pair"><div class="map-table half-out" id="table-l1-out">L1 Out</div><div class="map-table half-in" id="table-l1-in">L1 In</div></div>
+            <div class="table-pair"><div class="map-table half-out" id="table-l2-out">L2 Out</div><div class="map-table half-in" id="table-l2-in">L2 In</div></div>
+            <div class="table-pair"><div class="map-table half-out" id="table-l3-out">L3 Out</div><div class="map-table half-in" id="table-l3-in">L3 In</div></div>
+            <div class="table-pair"><div class="map-table half-out" id="table-l4-out">L4 Out</div><div class="map-table half-in" id="table-l4-in">L4 In</div></div>
+            <div class="table-pair"><div class="map-table half-out" id="table-l5-out">L5 Out</div><div class="map-table half-in" id="table-l5-in">L5 In</div></div>
+            <div class="table-pair"><div class="map-table half-out" id="table-l6-out">L6 Out</div><div class="map-table half-in" id="table-l6-in">L6 In</div></div>
+            <div class="table-pair"><div class="map-table half-out" id="table-l7-out">L7 Out</div><div class="map-table half-in" id="table-l7-in">L7 In</div></div>
+            <div class="table-pair"><div class="map-table half-out" id="table-l8-out">L8 Out</div><div class="map-table half-in" id="table-l8-in">L8 In</div></div>
           </div>
+          
           <div class="map-dancefloor">Dance Floor</div>
-          <div class="map-side-tables">
-            <div class="map-table" id="table-r1">Right 1</div>
-            <div class="map-table" id="table-r2">Right 2</div>
-            <div class="map-table" id="table-r3">Right 3</div>
-            <div class="map-table" id="table-r4">Right 4</div>
-            <div class="map-table" id="table-r5">Right 5</div>
-            <div class="map-table" id="table-r6">Right 6</div>
-            <div class="map-table" id="table-r7">Right 7</div>
-            <div class="map-table" id="table-r8">Right 8</div>
+          
+          <div class="map-side-tables r-side">
+            <div class="table-pair"><div class="map-table half-in" id="table-r1-in">R1 In</div><div class="map-table half-out" id="table-r1-out">R1 Out</div></div>
+            <div class="table-pair"><div class="map-table half-in" id="table-r2-in">R2 In</div><div class="map-table half-out" id="table-r2-out">R2 Out</div></div>
+            <div class="table-pair"><div class="map-table half-in" id="table-r3-in">R3 In</div><div class="map-table half-out" id="table-r3-out">R3 Out</div></div>
+            <div class="table-pair"><div class="map-table half-in" id="table-r4-in">R4 In</div><div class="map-table half-out" id="table-r4-out">R4 Out</div></div>
+            <div class="table-pair"><div class="map-table half-in" id="table-r5-in">R5 In</div><div class="map-table half-out" id="table-r5-out">R5 Out</div></div>
+            <div class="table-pair"><div class="map-table half-in" id="table-r6-in">R6 In</div><div class="map-table half-out" id="table-r6-out">R6 Out</div></div>
+            <div class="table-pair"><div class="map-table half-in" id="table-r7-in">R7 In</div><div class="map-table half-out" id="table-r7-out">R7 Out</div></div>
+            <div class="table-pair"><div class="map-table half-in" id="table-r8-in">R8 In</div><div class="map-table half-out" id="table-r8-out">R8 Out</div></div>
           </div>
         </div>
       </div>
@@ -387,33 +380,15 @@ setInterval(() => {
   document.getElementById('seconds').innerText = Math.floor((d%(1000*60))/1000);
 }, 1000);
 
-// ── V14 Seating Logic ──
+// Updated Guest List for In/Out Halves
 const guests = [
   { name: 'Ahmed Hassan', tableId: 'table-top', tableName: 'Top Table' },
   { name: 'Sara Hassan', tableId: 'table-top', tableName: 'Top Table' },
-  { name: 'Omar Khalil', tableId: 'table-l1', tableName: 'Left Table 1' },
-  { name: 'Layla Khalil', tableId: 'table-l1', tableName: 'Left Table 1' },
-  { name: 'Rania Yousef', tableId: 'table-l2', tableName: 'Left Table 2' },
-  { name: 'Mohammad Tariq', tableId: 'table-l2', tableName: 'Left Table 2' },
-  { name: 'Fatima Tariq', tableId: 'table-r1', tableName: 'Right Table 1' },
-  { name: 'Khalid Ibrahim', tableId: 'table-r1', tableName: 'Right Table 1' },
-  { name: 'Nadia Ibrahim', tableId: 'table-r2', tableName: 'Right Table 2' },
-  { name: 'Tarek Mansour', tableId: 'table-r2', tableName: 'Right Table 2' },
-  { name: 'Ibrahim Hamdan', tableId: 'table-l3', tableName: 'Left Table 3' },
-  { name: 'Hana Hamdan', tableId: 'table-l3', tableName: 'Left Table 3' },
-  { name: 'Ziad Qasim', tableId: 'table-l4', tableName: 'Left Table 4' },
-  { name: 'Maya Barakat', tableId: 'table-l4', tableName: 'Left Table 4' },
-  { name: 'Sami Fadel', tableId: 'table-r3', tableName: 'Right Table 3' },
-  { name: 'Reem Suleiman', tableId: 'table-r3', tableName: 'Right Table 3' },
-  { name: 'Firas Khoury', tableId: 'table-l5', tableName: 'Left Table 5' },
-  { name: 'Dina Atef', tableId: 'table-l6', tableName: 'Left Table 6' },
-  { name: 'Karim Saad', tableId: 'table-r4', tableName: 'Right Table 4' },
-  { name: 'Lina Jaber', tableId: 'table-r5', tableName: 'Right Table 5' },
-  { name: 'Yazan Odeh', tableId: 'table-l7', tableName: 'Left Table 7' },
-  { name: 'Samira Taha', tableId: 'table-l8', tableName: 'Left Table 8' },
-  { name: 'Nour Awad', tableId: 'table-r6', tableName: 'Right Table 6' },
-  { name: 'Basil Nassar', tableId: 'table-r7', tableName: 'Right Table 7' },
-  { name: 'Huda Qasim', tableId: 'table-r8', tableName: 'Right Table 8' }
+  { name: 'Omar Khalil', tableId: 'table-l1-out', tableName: 'Left Table 1 (Outside)' },
+  { name: 'Layla Khalil', tableId: 'table-l1-in', tableName: 'Left Table 1 (Inside)' },
+  { name: 'Rania Yousef', tableId: 'table-l2-out', tableName: 'Left Table 2' },
+  { name: 'Mohammad Tariq', tableId: 'table-l2-in', tableName: 'Left Table 2' }
+  // Add more guest mappings here using the ID pattern: table-lX-in, table-lX-out, etc.
 ];
 
 const searchInput = document.getElementById('gsearch');
@@ -441,13 +416,11 @@ searchInput.addEventListener('input', function() {
       const item = document.createElement('div');
       item.className = 'autocomplete-item';
       item.textContent = match.name;
-      
       item.addEventListener('click', () => {
         searchInput.value = match.name;
         autocompleteList.classList.remove('vis');
         showGuestSeat(match);
       });
-      
       autocompleteList.appendChild(item);
     });
   } else {
@@ -469,18 +442,14 @@ function showGuestSeat(guest) {
   resultWrapper.classList.add('vis');
 }
 
-// ── V14 3D ETHEREAL BOKEH / MAGICAL DUST Animation Logic ──
 (function(){
   const canvas = document.getElementById('hero-canvas');
   const renderer = new THREE.WebGLRenderer({ canvas: canvas, alpha: true, antialias: true });
   renderer.setPixelRatio(window.devicePixelRatio);
-  
   const scene = new THREE.Scene();
   scene.fog = new THREE.FogExp2(0xFBF8F2, 0.0015);
-  
   const camera = new THREE.PerspectiveCamera(60, window.innerWidth/window.innerHeight, 1, 1000);
   camera.position.z = 400;
-
   const texCanvas = document.createElement('canvas');
   texCanvas.width = 64; texCanvas.height = 64;
   const ctx = texCanvas.getContext('2d');
@@ -491,42 +460,23 @@ function showGuestSeat(guest) {
   ctx.fillStyle = gradient;
   ctx.fillRect(0, 0, 64, 64);
   const texture = new THREE.CanvasTexture(texCanvas);
-
   const geometry = new THREE.BufferGeometry();
   const vertices = [];
-  
   for ( let i = 0; i < 350; i ++ ) {
     const x = 800 * Math.random() - 400;
     const y = 800 * Math.random() - 400;
     const z = 800 * Math.random() - 400;
     vertices.push(x, y, z);
   }
-
   geometry.setAttribute( 'position', new THREE.Float32BufferAttribute( vertices, 3 ) );
-  
-  const groups = [
-    { size: 16, opacity: 0.7 },
-    { size: 8, opacity: 0.5 },
-    { size: 4, opacity: 0.3 }
-  ];
-  
+  const groups = [ { size: 16, opacity: 0.7 }, { size: 8, opacity: 0.5 }, { size: 4, opacity: 0.3 } ];
   const particles = new THREE.Group();
-  
   groups.forEach(g => {
-    const mat = new THREE.PointsMaterial({
-      size: g.size,
-      map: texture,
-      transparent: true,
-      opacity: g.opacity,
-      depthWrite: false,
-      blending: THREE.NormalBlending
-    });
+    const mat = new THREE.PointsMaterial({ size: g.size, map: texture, transparent: true, opacity: g.opacity, depthWrite: false, blending: THREE.NormalBlending });
     const p = new THREE.Points(geometry, mat);
     particles.add(p);
   });
-  
   scene.add(particles);
-
   function resize() {
     camera.aspect = window.innerWidth / window.innerHeight;
     camera.updateProjectionMatrix();
@@ -534,37 +484,22 @@ function showGuestSeat(guest) {
   }
   window.addEventListener('resize', resize);
   resize();
-
-  let mouseX = 0;
-  let mouseY = 0;
-
+  let mouseX = 0, mouseY = 0;
   document.addEventListener('mousemove', (e) => {
     mouseX = (e.clientX - window.innerWidth / 2) * 0.1;
     mouseY = (e.clientY - window.innerHeight / 2) * 0.1;
   });
-
-  document.addEventListener('touchmove', (e) => {
-    if(e.touches.length > 0) {
-      mouseX = (e.touches[0].clientX - window.innerWidth / 2) * 0.1;
-      mouseY = (e.touches[0].clientY - window.innerHeight / 2) * 0.1;
-    }
-  }, {passive: true});
-
   const clock = new THREE.Clock();
-
   function animate() {
     requestAnimationFrame(animate);
     const time = clock.getElapsedTime();
-    
     camera.position.x += (mouseX - camera.position.x) * 0.02;
     camera.position.y += (-mouseY - camera.position.y) * 0.02;
     camera.lookAt(scene.position);
-
     particles.children.forEach((p, index) => {
       p.rotation.y = time * 0.03 * (index + 1);
       p.rotation.x = time * 0.01 * (index + 1);
     });
-
     renderer.render(scene, camera);
   }
   animate();
