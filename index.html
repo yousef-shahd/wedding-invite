@@ -139,8 +139,16 @@ nav a:hover{color:var(--gold);}
   .luxe-program { padding: 40px 20px; }
   .v-time { padding-right: 15px; font-size: 18px; }
   .v-content { padding-left: 15px; }
-  .u-grid { grid-template-columns: 1fr 1.1fr 1fr; }
-  .map-dancefloor { display: none; }
+  /* This keeps the tables from squishing by allowing horizontal scrolling */
+  .u-grid { 
+    grid-template-columns: 140px 100px 140px; 
+    overflow-x: auto; 
+  }
+  /* Keeps the 'Dance Floor' text visible but smaller on mobile */
+  .map-dancefloor { 
+    display: flex; 
+    font-size: 18px; 
+  }
 }
 </style>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
