@@ -200,7 +200,7 @@ nav a:hover{color:var(--gold);}
     </div>
     <div class="timeline-v">
       <div class="v-item">
-        <div class="v-time">7:30 PM</div>
+        <div class="v-time">7:00 PM</div>
         <div class="v-marker"></div>
         <div class="v-content">
           <div class="v-title">Welcome</div>
@@ -208,7 +208,7 @@ nav a:hover{color:var(--gold);}
         </div>
       </div>
       <div class="v-item">
-        <div class="v-time">8:00 PM</div>
+        <div class="v-time"></div>
         <div class="v-marker"></div>
         <div class="v-content">
           <div class="v-title">Entrance</div>
@@ -216,7 +216,7 @@ nav a:hover{color:var(--gold);}
         </div>
       </div>
       <div class="v-item">
-        <div class="v-time">8:30 PM</div>
+        <div class="v-time"></div>
         <div class="v-marker"></div>
         <div class="v-content">
           <div class="v-title">Live Band</div>
@@ -224,7 +224,7 @@ nav a:hover{color:var(--gold);}
         </div>
       </div>
       <div class="v-item">
-        <div class="v-time">9:00 PM</div>
+        <div class="v-time"></div>
         <div class="v-marker"></div>
         <div class="v-content">
           <div class="v-title">Dinner Buffet</div>
@@ -232,7 +232,7 @@ nav a:hover{color:var(--gold);}
         </div>
       </div>
       <div class="v-item">
-        <div class="v-time">10:00 PM</div>
+        <div class="v-time"></div>
         <div class="v-marker"></div>
         <div class="v-content">
           <div class="v-title">Dancing</div>
@@ -285,7 +285,6 @@ nav a:hover{color:var(--gold);}
   </div>
 </section>
 
-<!-- UPDATED RSVP SECTION -->
 <div class="rsvp-section" id="rsvp">
   <div class="rsvp-inner">
     <p class="s-tag" style="color:var(--gold-l);">Join the Celebration</p>
@@ -446,11 +445,10 @@ function showGuestSeat(guest) {
   resultWrapper.classList.add('vis');
 }
 
-// RSVP AUTOMATION
 document.getElementById('wedding-rsvp-form').addEventListener('submit', function(e) {
   e.preventDefault();
   const btn = document.getElementById('submit-btn');
-  const scriptURL = 'https://script.google.com/macros/s/AKfycbyhLxJROwTiBLQ__Ijkw902ywfBhvN_W22KVuBe09TQUoEr3q4w2CjfyQrwI5dM62eH/exec'; // PASTE YOUR WEB APP URL HERE
+  const scriptURL = 'https://script.google.com/macros/s/AKfycbyhLxJROwTiBLQ__Ijkw902ywfBhvN_W22KVuBe09TQUoEr3q4w2CjfyQrwI5dM62eH/exec';
   
   btn.innerText = "Sending...";
   btn.style.opacity = "0.5";
@@ -492,9 +490,9 @@ document.getElementById('wedding-rsvp-form').addEventListener('submit', function
   texCanvas.width = 64; texCanvas.height = 64;
   const ctx = texCanvas.getContext('2d');
   const gradient = ctx.createRadialGradient(32, 32, 0, 32, 32, 32);
-  gradient.addColorStop(0, 'rgba(196, 151, 58, 1)');     
-  gradient.addColorStop(0.3, 'rgba(196, 151, 58, 0.6)');   
-  gradient.addColorStop(1, 'rgba(196, 151, 58, 0)');     
+  gradient.addColorStop(0, 'rgba(196, 151, 58, 1)');      
+  gradient.addColorStop(0.3, 'rgba(196, 151, 58, 0.6)');    
+  gradient.addColorStop(1, 'rgba(196, 151, 58, 0)');      
   ctx.fillStyle = gradient;
   ctx.fillRect(0, 0, 64, 64);
   const texture = new THREE.CanvasTexture(texCanvas);
