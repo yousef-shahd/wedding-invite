@@ -9,7 +9,7 @@
 :root{--ivory:#FBF8F2;--cream:#F0E6D3;--gold:#C4973A;--gold-d:#8B6B2A;--gold-l:#E8D5A3;--ink:#1A1410;--brown:#2A1E14;--muted:#8A7D72;}
 *{margin:0;padding:0;box-sizing:border-box;}
 html{scroll-behavior:smooth;}
-body{background:--ivory;color:var(--ink);font-family:'Jost',sans-serif;font-weight:300;overflow-x:hidden;}
+body{background:var(--ivory);color:var(--ink);font-family:'Jost',sans-serif;font-weight:300;overflow-x:hidden;}
 
 /* ── NAV ── */
 nav{position:fixed;top:0;width:100%;z-index:200;padding:22px 40px;display:flex;justify-content:center;gap:48px;transition:all .4s;}
@@ -48,24 +48,22 @@ nav a:hover{color:var(--gold);}
 .t-num { font-family: 'Cormorant Garamond', serif; font-size: clamp(40px, 8vw, 65px); color: #fff; line-height: 1; font-weight: 300; }
 .t-label { color: var(--gold-l); font-size: 9px; text-transform: uppercase; letter-spacing: 3px; margin-top: 10px; }
 
-/* ── CLEAN LEFT-ALIGNED PROGRAM ── */
-.schedule-container { padding: 100px 20px; background: var(--ivory); }
-.luxe-program { max-width: 500px; margin: 0 auto; background: #fff; padding: 80px 40px; border-radius: 4px; box-shadow: 0 30px 100px rgba(0,0,0,0.05); border: 1px solid rgba(196,151,58,0.1); position: relative; }
+/* ── UPDATED TIMELINE STYLES ── */
+.schedule-container { padding: 100px 20px; background: var(--ivory); position: relative;}
+.luxe-program { max-width: 500px; margin: 0 auto; background: #fff; padding: 60px 50px; border-radius: 4px; box-shadow: 0 30px 100px rgba(0,0,0,0.05); border: 1px solid rgba(196,151,58,0.1); position: relative; }
 .luxe-program::before { content: ''; position: absolute; top: 15px; left: 15px; right: 15px; bottom: 15px; border: 1px solid rgba(196,151,58,0.1); pointer-events: none;}
-
 .prog-head { text-align: center; margin-bottom: 60px; }
-.prog-head h2 { font-family: 'Cormorant Garamond', serif; font-size: clamp(24px, 5vw, 32px); letter-spacing: 8px; text-transform: uppercase; color: var(--brown); font-weight: 300; }
-.prog-dot { width: 8px; height: 8px; background: var(--gold); transform: rotate(45deg); margin: 25px auto; }
+.prog-head h2 { font-family: 'Cormorant Garamond', serif; font-size: 32px; letter-spacing: 5px; text-transform: uppercase; color: var(--brown); font-weight: 300; }
+.prog-dot { width: 6px; height: 6px; background: var(--gold); transform: rotate(45deg); margin: 20px auto; }
 
-.timeline-v { position: relative; padding-left: 30px; margin-left: 20px; }
-.timeline-v::before { content: ''; position: absolute; left: 0; top: 0; bottom: 0; width: 1px; background: rgba(196,151,58,0.25); }
+.timeline-v { position: relative; margin-left: 20px; padding-left: 40px; }
+.timeline-v::before { content: ''; position: absolute; left: 0; top: 0; bottom: 0; width: 1px; background: linear-gradient(180deg, transparent, rgba(196,151,58,0.3) 15%, rgba(196,151,58,0.3) 85%, transparent); }
 
 .v-item { position: relative; margin-bottom: 50px; }
 .v-item:last-child { margin-bottom: 0; }
-
-.v-marker { position: absolute; left: -36px; top: 8px; width: 12px; height: 12px; background: #fff; border: 2px solid var(--gold); border-radius: 50%; z-index: 2; }
-
-.v-title { font-family: 'Cormorant Garamond', serif; font-size: 24px; color: var(--brown); font-weight: 400; margin-bottom: 6px; letter-spacing: 1px; }
+.v-marker { position: absolute; left: -46px; top: 8px; width: 12px; height: 12px; background: #fff; border: 2px solid var(--gold); border-radius: 50%; z-index: 2; }
+.v-content { width: 100%; text-align: left; }
+.v-title { font-family: 'Cormorant Garamond', serif; font-size: 24px; color: var(--brown); font-weight: 500; margin-bottom: 5px; }
 .v-desc { font-size: 13px; color: var(--muted); line-height: 1.6; letter-spacing: 0.5px;}
 
 /* ── LAYOUT SECTIONS ── */
@@ -83,33 +81,76 @@ nav a:hover{color:var(--gold);}
 /* Menu Grid */
 .menu-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(300px,1fr));gap:40px;max-width:1100px;margin:0 auto;}
 .mc{background: var(--ivory); padding: 35px 25px; border-radius: 8px; box-shadow: 0 10px 30px rgba(0,0,0,0.04); border: 1px solid rgba(196,151,58,.15); position: relative;}
+.mc-label{font-size:11px;letter-spacing:4px;text-transform:uppercase;color:var(--gold);margin-bottom:20px;font-weight:500;text-align:center;}
 .mc-items{border-top:1px solid rgba(196,151,58,.2);}
 .mi{padding:18px 0;border-bottom:1px solid rgba(196,151,58,.1); text-align:center;}
+.mi:last-child { border-bottom: none; padding-bottom: 0; }
 .mi-name{font-family:'Cormorant Garamond',serif;font-size:22px;font-weight:500;color:var(--brown);margin-bottom:6px;}
+.mi-desc{font-size:13.5px;color:var(--muted);line-height:1.5;}
 
 /* RSVP SECTION */
 .rsvp-section { background: var(--brown); color: #fff; padding: 100px 20px; text-align: center; }
+.rsvp-inner { max-width: 600px; margin: 0 auto; }
 .btn-rsvp { display: inline-block; padding: 15px 35px; background: var(--gold); color: #fff; text-decoration: none; border-radius: 4px; font-family: 'Cormorant Garamond'; letter-spacing: 2px; text-transform: uppercase; transition: 0.3s; min-width: 220px; border: none; font-size: 14px; }
+.btn-rsvp:hover { background: #b3862e; transform: translateY(-2px); }
 
-/* Seating Search */
+/* Seating Search Improvements */
 .search-wrap{max-width:400px;margin:0 auto 20px; position: relative; width: 100%;}
-.search-in{width:100%;background:transparent;border:none;border-bottom:1px solid var(--gold);padding:12px 0;font-family:'Cormorant Garamond',serif;font-size:22px;font-weight:400;color:var(--brown);outline:none;text-align:center;letter-spacing:1px; border-radius: 0;}
+.search-in{width:100%;background:transparent;border:none;border-bottom:1px solid var(--gold);padding:12px 0;font-family:'Cormorant Garamond',serif;font-size:22px;font-weight:400;color:var(--brown);outline:none;text-align:center;letter-spacing:1px;transition:border-color .3s; border-radius: 0;}
 
-.seating-result-wrapper { opacity: 0; transform: translateY(15px); display: none; transition: all 0.5s ease; }
-.seating-result-wrapper.vis { display: block; opacity: 1; transform: translateY(0); }
+/* Autocomplete Dropdown Style */
+.autocomplete-list {
+  position: absolute; top: 100%; left: 0; right: 0;
+  background: #fff; border: 1px solid var(--gold-l);
+  border-top: none; z-index: 10;
+  max-height: 200px; overflow-y: auto;
+  border-radius: 0 0 8px 8px; box-shadow: 0 10px 20px rgba(0,0,0,0.05);
+  display: none;
+}
+.autocomplete-list.vis { display: block; }
+.autocomplete-item {
+  padding: 12px 15px; font-family: 'Cormorant Garamond', serif; font-size: 18px;
+  color: var(--brown); cursor: pointer; border-bottom: 1px solid rgba(0,0,0,0.03);
+  text-align: center; transition: background 0.2s;
+}
+.autocomplete-item:hover { background: var(--cream); color: var(--gold); }
 
-.u-map { background: #fff; border-radius: 12px; padding: 40px 30px; box-shadow: 0 20px 50px rgba(0,0,0,0.08); border: 1px solid rgba(196, 151, 58, 0.2); overflow-x: auto; }
+/* Seating UI Transitions */
+.seating-result-wrapper {
+  opacity: 0; transform: translateY(15px); pointer-events: none;
+  transition: all 0.5s ease;
+  display: none; 
+}
+.seating-result-wrapper.vis {
+  display: block; opacity: 1; transform: translateY(0); pointer-events: all;
+}
+
+/* ── SEATING STYLES ── */
+.u-map { background: #fff; border-radius: 12px; padding: 40px 30px; box-shadow: 0 20px 50px rgba(0,0,0,0.08); border: 1px solid rgba(196, 151, 58, 0.2); width: 100%; overflow-x: auto; }
 .u-grid { display: grid; grid-template-columns: 1fr 1.2fr 1fr; gap: 15px; min-width: 280px; }
 .table-pair { display: flex; gap: 2px; margin-bottom: 10px; width: 100%; }
-.map-table { background: var(--ivory); border: 1px solid rgba(196,151,58,0.3); border-radius: 4px; padding: 12px 5px; text-align: center; font-size: 8.5px; text-transform: uppercase; color: var(--muted); flex: 1; }
-.map-top-table { grid-column: 1 / -1; margin-bottom: 12px; padding: 18px 5px; background: var(--cream); }
-.map-dancefloor { display: flex; align-items: center; justify-content: center; font-family: 'Great Vibes', cursive; font-size: 24px; color: var(--gold-l); opacity: 0.6; }
-.map-table.active { background: var(--gold); color: #fff; transform: scale(1.05); }
+.map-table { background: var(--ivory); border: 1px solid rgba(196,151,58,0.3); border-radius: 4px; padding: 12px 5px; text-align: center; font-size: 8.5px; text-transform: uppercase; letter-spacing: 0.5px; color: var(--muted); transition: all 0.4s; display: flex; align-items: center; justify-content: center; flex: 1; white-space: nowrap; }
+.map-top-table { grid-column: 1 / -1; margin-bottom: 12px; padding: 18px 5px; background: var(--cream); border-radius: 6px;}
+.map-side-tables { display: flex; flex-direction: column; }
+.half-out { border-radius: 6px 2px 2px 6px; }
+.half-in { border-radius: 2px 6px 6px 2px; }
+
+/* Right side rounding flipped */
+.r-side .half-in { border-radius: 6px 2px 2px 6px; }
+.r-side .half-out { border-radius: 2px 6px 6px 2px; }
+
+.map-dancefloor { display: flex; align-items: center; justify-content: center; font-family: 'Great Vibes', cursive; font-size: clamp(22px, 5vw, 34px); color: var(--gold-l); opacity: 0.6; text-align: center; line-height: 1; }
+.map-table.active { background: var(--gold); border-color: var(--gold); color: #fff; box-shadow: 0 5px 20px rgba(196, 151, 58, 0.5); transform: scale(1.05); z-index: 2; font-weight: 500; }
 
 @media(max-width:760px){
   nav{gap:15px;padding:12px 15px;}
   nav a{font-size:8px;letter-spacing:2px;}
-  .luxe-program { padding: 60px 30px; margin: 0 10px; }
+  .luxe-program { padding: 40px 25px; margin: 0 10px;}
+  .u-grid { grid-template-columns: 1fr 0.7fr 1fr; gap: 10px; }
+  .table-pair { margin-bottom: 6px; }
+  .map-table { font-size: 7px; padding: 8px 1px; letter-spacing: 0px; }
+  .map-top-table { padding: 12px 5px; margin-bottom: 8px; }
+  .map-dancefloor { font-size: 16px; opacity: 0.4; }
 }
 </style>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
@@ -159,28 +200,38 @@ nav a:hover{color:var(--gold);}
     <div class="timeline-v">
       <div class="v-item">
         <div class="v-marker"></div>
-        <div class="v-title">Welcome</div>
-        <div class="v-desc">Guest arrival and welcome drinks.</div>
+        <div class="v-content">
+          <div class="v-title">Welcome</div>
+          <div class="v-desc">Guest arrival and welcome drinks.</div>
+        </div>
       </div>
       <div class="v-item">
         <div class="v-marker"></div>
-        <div class="v-title">Entrance</div>
-        <div class="v-desc">The bride and groom make their entrance.</div>
+        <div class="v-content">
+          <div class="v-title">Entrance</div>
+          <div class="v-desc">The bride and groom make their entrance.</div>
+        </div>
       </div>
       <div class="v-item">
         <div class="v-marker"></div>
-        <div class="v-title">Live Band</div>
-        <div class="v-desc">Opening musical performances.</div>
+        <div class="v-content">
+          <div class="v-title">Live Band</div>
+          <div class="v-desc">Opening musical performances.</div>
+        </div>
       </div>
       <div class="v-item">
         <div class="v-marker"></div>
-        <div class="v-title">Dinner Buffet</div>
-        <div class="v-desc">Exquisite culinary stations are open.</div>
+        <div class="v-content">
+          <div class="v-title">Dinner Buffet</div>
+          <div class="v-desc">Exquisite culinary stations are open.</div>
+        </div>
       </div>
       <div class="v-item">
         <div class="v-marker"></div>
-        <div class="v-title">Dancing</div>
-        <div class="v-desc">Celebration continues into the night.</div>
+        <div class="v-content">
+          <div class="v-title">Dancing</div>
+          <div class="v-desc">Celebration continues into the night.</div>
+        </div>
       </div>
     </div>
   </div>
@@ -192,36 +243,131 @@ nav a:hover{color:var(--gold);}
   <p class="s-tag">Culinary Experience</p>
   <div class="s-divider"><div class="s-gem"></div></div>
   <h2 class="s-title" style="margin-bottom:15px;">The Menu</h2>
+  <p style="text-align:center; font-family:'Cormorant Garamond'; font-style:italic; color:var(--muted); margin-bottom:50px;">Enjoy our full selection from the open buffet</p>
+  
   <div class="menu-grid">
     <div class="mc">
-      <div class="mi"><div class="mi-name">Mezzeh</div></div>
-      <div class="mi"><div class="mi-name">Salad Bar</div></div>
+      <div class="mc-label">Appetizers & Breads</div>
+      <div class="mc-items">
+        <div class="mi"><div class="mi-name">Bread Display</div><div class="mi-desc">Fresh Arabic Bread, Olive Bread, Walnut Bread, Baguette, Assorted Bread Rolls, Grissini Sticks.</div></div>
+        <div class="mi"><div class="mi-name">Men Al-Furon</div><div class="mi-desc">Freshly Made Knead Dough with Three Different Stuffings, Halloumi Cheese, Za'atar, Lahm Bi Ajin.</div></div>
+        <div class="mi"><div class="mi-name">Mezzeh</div><div class="mi-desc">Hummus Beiruti, Moutabel, Yalanji, Grilled Artichoke with Pesto, Tomato Capers, Baba Ganoush, Kishkeh, Turkish Muhammara.</div></div>
+        <div class="mi"><div class="mi-name">Salad Bar</div><div class="mi-desc">Fattoush, Tabbouleh, Greek Salad, German Potato Salad with Crispy Beef Bacon, Green Bean Salad, Rocca Salad with Parmesan & Mushrooms, Thai Beef Salad, Chicken Caesar Salad, Palmetto Salad, Mixed Olives, Shrimp Salad, Rocca & Smoked Salmon Salad.</div></div>
+      </div>
     </div>
     <div class="mc">
-      <div class="mi"><div class="mi-name">Lamb Carving</div></div>
-      <div class="mi"><div class="mi-name">Grill Station</div></div>
+      <div class="mc-label">Live Stations & Mains</div>
+      <div class="mc-items">
+        <div class="mi"><div class="mi-name">Lamb Carving Station</div><div class="mi-desc">Whole Roasted Lamb Served with Oriental Rice, Tzatziki Cucumber Salad.</div></div>
+        <div class="mi"><div class="mi-name">Grill Station</div><div class="mi-desc">Kofta Kebab, Shish Tawook Roasted Potatoes, Grilled Vegetables.</div></div>
+        <div class="mi"><div class="mi-name">Shawarma Station</div><div class="mi-desc">Chicken Shawarma with Full Condiments Served with Shrak Bread, Garlic Mayonnaise, Pickles & Tomatoes.</div></div>
+        <div class="mi"><div class="mi-name">Asian Station</div><div class="mi-desc">Live Stir Fried Chicken with Cashew Nuts Served with Fried Rice & Chicken Noodles.</div></div>
+        <div class="mi"><div class="mi-name">Indian Station</div><div class="mi-desc">Butter Chicken Curry, Biryani Rice Served with Condiments.</div></div>
+        <div class="mi"><div class="mi-name">Italian Station</div><div class="mi-desc">Freshly Made Penne Arrabiata, Fettuccine Alfredo.</div></div>
+        <div class="mi"><div class="mi-name">Tempura Station</div><div class="mi-desc">Live Cooking Station of Chicken & Fish Tempura Served with Soy & Sweet Chili Sauces.</div></div>
+      </div>
     </div>
     <div class="mc">
-      <div class="mi"><div class="mi-name">Desserts</div></div>
-      <div class="mi"><div class="mi-name">Knafeh Station</div></div>
+      <div class="mc-label">Desserts</div>
+      <div class="mc-items">
+        <div class="mi"><div class="mi-name">Dessert Corner</div><div class="mi-desc">Apple Crumble, Triple Chocolate, Assorted Fruit Cuts, Tartlets Crème Caramel, Tiramisu Shots, Chocolate & Strawberry Mousse, Chocolate Éclairs, Um Ali, Chocolate Brownies.</div></div>
+        <div class="mi"><div class="mi-name">Knafeh Station</div><div class="mi-desc">Live Knafeh Station Being Freshly Made with Cheese on Hot Stove.</div></div>
+        <div class="mi"><div class="mi-name">Chocolate Fountain</div><div class="mi-desc">White & Dark Chocolate Served with a Selection of Seasonal Fresh Fruits & Marshmallow Skewers.</div></div>
+        <div class="mi"><div class="mi-name">Fruit Display</div><div class="mi-desc">Fresh Seasonal Fruit.</div></div>
+      </div>
     </div>
   </div>
 </section>
 
 <div class="rsvp-section" id="rsvp">
-  <h2 class="s-title" style="color:white; margin-bottom:20px; font-size: 60px;">RSVP</h2>
-  <form id="wedding-rsvp-form" style="max-width:400px; margin:0 auto;">
-    <input type="text" id="rsvp-name" placeholder="Your Full Name" required 
-           style="width:100%; background:transparent; border:none; border-bottom:1px solid var(--gold); color:white; padding:12px; font-size:20px; outline:none; text-align:center;">
-    <div style="margin: 20px 0;">
-       <label style="color:white; margin-right: 15px;"><input type="radio" name="status" value="Attending" checked> Accept</label>
-       <label style="color:white;"><input type="radio" name="status" value="Not Attending"> Decline</label>
+  <div class="rsvp-inner">
+    <p class="s-tag" style="color:var(--gold-l);">Join the Celebration</p>
+    <div class="s-divider" style="--gold: var(--gold-l);"><div class="s-gem"></div></div>
+    <h2 class="s-title" style="color:white; margin-bottom:20px; font-size: 60px;">RSVP</h2>
+    
+    <div id="rsvp-form-container">
+      <form id="wedding-rsvp-form" style="max-width:400px; margin:0 auto;">
+        <input type="text" id="rsvp-name" placeholder="Your Full Name" required 
+               style="width:100%; background:transparent; border:none; border-bottom:1px solid var(--gold); color:white; padding:12px; font-family:'Cormorant Garamond'; font-size:20px; margin-bottom:20px; outline:none; text-align:center;">
+        
+        <div style="display:flex; justify-content:center; gap:20px; margin-bottom:30px;">
+          <label style="cursor:pointer; font-family:'Cormorant Garamond'; font-size:18px;">
+            <input type="radio" name="status" value="Attending" required style="accent-color:var(--gold);"> Joyfully Accept
+          </label>
+          <label style="cursor:pointer; font-family:'Cormorant Garamond'; font-size:18px;">
+            <input type="radio" name="status" value="Not Attending" style="accent-color:var(--gold);"> Regretfully Decline
+          </label>
+        </div>
+
+        <button type="submit" id="submit-btn" class="btn-rsvp" style="cursor:pointer; width:100%;">Confirm Attendance</button>
+      </form>
     </div>
-    <button type="submit" id="submit-btn" class="btn-rsvp">Confirm</button>
-  </form>
+    
+    <div id="rsvp-thanks" style="display:none; font-family:'Cormorant Garamond'; font-size:24px; color:var(--gold-l); margin-top:20px;">
+      Thank you. Your response has been recorded.
+    </div>
+  </div>
 </div>
 
-<footer style="padding:80px; text-align:center;">
+<img class="img-break" src="hands.jpg" alt="Hands photo">
+
+<div class="sec-alt" id="seating">
+  <section class="sec">
+    <p class="s-tag">Find Your Place</p>
+    <div class="s-divider"><div class="s-gem"></div></div>
+    <h2 class="s-title" style="margin-bottom:44px;">Seating Plan</h2>
+    
+    <div class="search-wrap">
+      <input class="search-in" id="gsearch" type="text" placeholder="Type your name..." autocomplete="off">
+      <div class="autocomplete-list" id="autocomplete-list"></div>
+    </div>
+    
+    <div id="seating-locked-container" style="display: block !important; visibility: visible !important; opacity: 1 !important; text-align:center; margin: 40px auto; max-width: 500px; padding: 40px 20px; border: 1px dashed var(--gold); border-radius: 8px; background: rgba(196, 151, 58, 0.03); position: relative; z-index: 100;">
+      <p style="font-family:'Cormorant Garamond', serif; font-size: 24px; color: var(--brown); font-weight: 300; letter-spacing: 2px; font-style: italic; margin: 0; line-height: 1.4;">
+        Please come back on the day of event
+      </p>
+    </div>
+
+    <div class="seating-result-wrapper" id="seating-result">
+      <div id="guest-found" style="text-align:center; margin-bottom:24px; font-family:'Cormorant Garamond'; font-size:24px;">
+        Welcome, <b id="guest-name-display"></b>!<br>
+        You are seated at: <span id="table-name-display" style="color:var(--gold); font-weight:500;"></span>
+      </div>
+      
+      <div class="u-map">
+        <div class="u-grid">
+          <div class="map-table map-top-table" id="table-top">Top Table</div>
+          
+          <div class="map-side-tables l-side">
+            <div class="table-pair"><div class="map-table half-out" id="table-l1-out">Left Out</div><div class="map-table half-in" id="table-l1-in">Left In</div></div>
+            <div class="table-pair"><div class="map-table half-out" id="table-l2-out">Left Out</div><div class="map-table half-in" id="table-l2-in">Left In</div></div>
+            <div class="table-pair"><div class="map-table half-out" id="table-l3-out">Left Out</div><div class="map-table half-in" id="table-l3-in">Left In</div></div>
+            <div class="table-pair"><div class="map-table half-out" id="table-l4-out">Left Out</div><div class="map-table half-in" id="table-l4-in">Left In</div></div>
+            <div class="table-pair"><div class="map-table half-out" id="table-l5-out">Left Out</div><div class="map-table half-in" id="table-l5-in">Left In</div></div>
+            <div class="table-pair"><div class="map-table half-out" id="table-l6-out">Left Out</div><div class="map-table half-in" id="table-l6-in">Left In</div></div>
+            <div class="table-pair"><div class="map-table half-out" id="table-l7-out">Left Out</div><div class="map-table half-in" id="table-l7-in">Left In</div></div>
+            <div class="table-pair"><div class="map-table half-out" id="table-l8-out">Left Out</div><div class="map-table half-in" id="table-l8-in">Left In</div></div>
+          </div>
+          
+          <div class="map-dancefloor">Dance Floor</div>
+          
+          <div class="map-side-tables r-side">
+            <div class="table-pair"><div class="map-table half-in" id="table-r1-in">Right In</div><div class="map-table half-out" id="table-r1-out">Right Out</div></div>
+            <div class="table-pair"><div class="map-table half-in" id="table-r2-in">Right In</div><div class="map-table half-out" id="table-r2-out">Right Out</div></div>
+            <div class="table-pair"><div class="map-table half-in" id="table-r3-in">Right In</div><div class="map-table half-out" id="table-r3-out">Right Out</div></div>
+            <div class="table-pair"><div class="map-table half-in" id="table-r4-in">Right In</div><div class="map-table half-out" id="table-r4-out">Right Out</div></div>
+            <div class="table-pair"><div class="map-table half-in" id="table-r5-in">Right In</div><div class="map-table half-out" id="table-r5-out">Right Out</div></div>
+            <div class="table-pair"><div class="map-table half-in" id="table-r6-in">Right In</div><div class="map-table half-out" id="table-r6-out">Right Out</div></div>
+            <div class="table-pair"><div class="map-table half-in" id="table-r7-in">Right In</div><div class="map-table half-out" id="table-r7-out">Right Out</div></div>
+            <div class="table-pair"><div class="map-table half-in" id="table-r8-in">Right In</div><div class="map-table half-out" id="table-r8-out">Right Out</div></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+</div>
+
+<footer style="padding:80px; text-align:center; background:var(--ivory);">
   <div style="font-family:'Great Vibes'; font-size:32px; color:var(--gold);">Yousef & Shahd</div>
   <p style="font-size:10px; letter-spacing:3px; opacity:0.6; margin-top:10px;">MAY 9, 2026 · COUNTRY CLUB</p>
 </footer>
@@ -239,33 +385,148 @@ setInterval(() => {
   document.getElementById('seconds').innerText = Math.floor((d%(1000*60))/1000);
 }, 1000);
 
+const guests = [];
+const searchInput = document.getElementById('gsearch');
+const autocompleteList = document.getElementById('autocomplete-list');
+const resultWrapper = document.getElementById('seating-result');
+const guestNameDisplay = document.getElementById('guest-name-display');
+const tableNameDisplay = document.getElementById('table-name-display');
+
+searchInput.addEventListener('input', function() {
+  const query = this.value.toLowerCase().trim();
+  autocompleteList.innerHTML = '';
+  resultWrapper.classList.remove('vis');
+  document.querySelectorAll('.map-table').forEach(t => t.classList.remove('active'));
+
+  if (query.length < 2) {
+    autocompleteList.classList.remove('vis');
+    return;
+  }
+
+  const matches = guests.filter(g => g.name.toLowerCase().includes(query));
+
+  if (matches.length > 0) {
+    autocompleteList.classList.add('vis');
+    matches.forEach(match => {
+      const item = document.createElement('div');
+      item.className = 'autocomplete-item';
+      item.textContent = match.name;
+      item.addEventListener('click', () => {
+        searchInput.value = match.name;
+        autocompleteList.classList.remove('vis');
+        showGuestSeat(match);
+      });
+      autocompleteList.appendChild(item);
+    });
+  } else {
+    autocompleteList.classList.remove('vis');
+  }
+});
+
+document.addEventListener('click', function(e) {
+  if (e.target !== searchInput && e.target !== autocompleteList) {
+    autocompleteList.classList.remove('vis');
+  }
+});
+
+function showGuestSeat(guest) {
+  guestNameDisplay.textContent = guest.name.toUpperCase();
+  tableNameDisplay.textContent = guest.tableName;
+  const targetTable = document.getElementById(guest.tableId);
+  if(targetTable) targetTable.classList.add('active');
+  resultWrapper.classList.add('vis');
+}
+
+document.getElementById('wedding-rsvp-form').addEventListener('submit', function(e) {
+  e.preventDefault();
+  const btn = document.getElementById('submit-btn');
+  const scriptURL = 'https://script.google.com/macros/s/AKfycbyhLxJROwTiBLQ__Ijkw902ywfBhvN_W22KVuBe09TQUoEr3q4w2CjfyQrwI5dM62eH/exec';
+
+  btn.innerText = "Sending...";
+  btn.style.opacity = "0.5";
+  btn.disabled = true;
+
+  const data = {
+    name: document.getElementById('rsvp-name').value,
+    status: document.querySelector('input[name="status"]:checked').value,
+    guests: 1
+  };
+
+  fetch(scriptURL, {
+    method: 'POST',
+    mode: 'no-cors',
+    cache: 'no-cache',
+    body: JSON.stringify(data)
+  })
+  .then(() => {
+    document.getElementById('wedding-rsvp-form').style.display = 'none';
+    document.getElementById('rsvp-thanks').style.display = 'block';
+  })
+  .catch(error => {
+    console.error('Error!', error.message);
+    btn.innerText = "Error - Try Again";
+    btn.disabled = false;
+    btn.style.opacity = "1";
+  });
+});
+
 (function(){
   const canvas = document.getElementById('hero-canvas');
   const renderer = new THREE.WebGLRenderer({ canvas: canvas, alpha: true, antialias: true });
   renderer.setPixelRatio(window.devicePixelRatio);
   const scene = new THREE.Scene();
+  scene.fog = new THREE.FogExp2(0xFBF8F2, 0.0015);
   const camera = new THREE.PerspectiveCamera(60, window.innerWidth/window.innerHeight, 1, 1000);
   camera.position.z = 400;
+  const texCanvas = document.createElement('canvas');
+  texCanvas.width = 64; texCanvas.height = 64;
+  const ctx = texCanvas.getContext('2d');
+  const gradient = ctx.createRadialGradient(32, 32, 0, 32, 32, 32);
+  gradient.addColorStop(0, 'rgba(196, 151, 58, 1)');     
+  gradient.addColorStop(0.3, 'rgba(196, 151, 58, 0.6)');   
+  gradient.addColorStop(1, 'rgba(196, 151, 58, 0)');     
+  ctx.fillStyle = gradient;
+  ctx.fillRect(0, 0, 64, 64);
+  const texture = new THREE.CanvasTexture(texCanvas);
   const geometry = new THREE.BufferGeometry();
   const vertices = [];
   for ( let i = 0; i < 350; i ++ ) {
     vertices.push(800 * Math.random() - 400, 800 * Math.random() - 400, 800 * Math.random() - 400);
   }
-  geometry.setAttribute('position', new THREE.Float32BufferAttribute(vertices, 3));
-  const mat = new THREE.PointsMaterial({ size: 4, color: 0xC4973A, transparent: true, opacity: 0.5 });
-  const points = new THREE.Points(geometry, mat);
-  scene.add(points);
-  function animate() {
-    requestAnimationFrame(animate);
-    points.rotation.y += 0.001;
-    renderer.render(scene, camera);
-  }
-  window.addEventListener('resize', () => {
+  geometry.setAttribute( 'position', new THREE.Float32BufferAttribute( vertices, 3 ) );
+  const groups = [ { size: 16, opacity: 0.7 }, { size: 8, opacity: 0.5 }, { size: 4, opacity: 0.3 } ];
+  const particles = new THREE.Group();
+  groups.forEach(g => {
+    const mat = new THREE.PointsMaterial({ size: g.size, map: texture, transparent: true, opacity: g.opacity, depthWrite: false, blending: THREE.NormalBlending });
+    const p = new THREE.Points(geometry, mat);
+    particles.add(p);
+  });
+  scene.add(particles);
+  function resize() {
     camera.aspect = window.innerWidth / window.innerHeight;
     camera.updateProjectionMatrix();
     renderer.setSize(window.innerWidth, window.innerHeight);
+  }
+  window.addEventListener('resize', resize);
+  resize();
+  let mouseX = 0, mouseY = 0;
+  document.addEventListener('mousemove', (e) => {
+    mouseX = (e.clientX - window.innerWidth / 2) * 0.1;
+    mouseY = (e.clientY - window.innerHeight / 2) * 0.1;
   });
-  renderer.setSize(window.innerWidth, window.innerHeight);
+  const clock = new THREE.Clock();
+  function animate() {
+    requestAnimationFrame(animate);
+    const time = clock.getElapsedTime();
+    camera.position.x += (mouseX - camera.position.x) * 0.02;
+    camera.position.y += (-mouseY - camera.position.y) * 0.02;
+    camera.lookAt(scene.position);
+    particles.children.forEach((p, index) => {
+      p.rotation.y = time * 0.03 * (index + 1);
+      p.rotation.x = time * 0.01 * (index + 1);
+    });
+    renderer.render(scene, camera);
+  }
   animate();
 })();
 </script>
