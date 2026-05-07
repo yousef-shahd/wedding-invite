@@ -1,4 +1,3 @@
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -93,31 +92,54 @@ nav a:hover{color:var(--gold);}
 .btn-rsvp { display: inline-block; padding: 15px 35px; background: var(--gold); color: #fff; text-decoration: none; border-radius: 4px; font-family: 'Cormorant Garamond'; letter-spacing: 2px; text-transform: uppercase; transition: 0.3s; min-width: 220px; border: none; font-size: 14px; }
 .btn-rsvp:hover { background: #b3862e; transform: translateY(-2px); }
 
-/* ── SEATING (CHAIR SYSTEM) ── */
+/* ── UPDATED AMENDED SEATING ── */
 .search-wrap{max-width:400px;margin:0 auto 20px; position: relative; width: 100%;}
 .search-in{width:100%;background:transparent;border:none;border-bottom:1px solid var(--gold);padding:12px 0;font-family:'Cormorant Garamond',serif;font-size:22px;font-weight:400;color:var(--brown);outline:none;text-align:center;letter-spacing:1px;transition:border-color .3s; border-radius: 0;}
 .autocomplete-list { position: absolute; top: 100%; left: 0; right: 0; background: #fff; border: 1px solid var(--gold-l); border-top: none; z-index: 10; max-height: 200px; overflow-y: auto; border-radius: 0 0 8px 8px; box-shadow: 0 10px 20px rgba(0,0,0,0.05); display: none; }
 .autocomplete-list.vis { display: block; }
 .autocomplete-item { padding: 12px 15px; font-family: 'Cormorant Garamond', serif; font-size: 18px; color: var(--brown); cursor: pointer; border-bottom: 1px solid rgba(0,0,0,0.03); text-align: center; transition: background 0.2s; }
 .autocomplete-item:hover { background: var(--cream); color: var(--gold); }
+
 .seating-result-wrapper { opacity: 0; transform: translateY(15px); transition: all 0.5s ease; display: none; }
 .seating-result-wrapper.vis { display: block; opacity: 1; transform: translateY(0); }
-.u-map { background: #fff; border-radius: 12px; padding: 60px 40px; box-shadow: 0 20px 50px rgba(0, 0, 0, 0.08); border: 1px solid rgba(196, 151, 58, 0.2); width: 100%; overflow-x: auto; }
-.u-grid { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 40px; min-width: 800px; }
+
+/* Container to handle the scaling trick */
+.u-map-outer { width: 100%; overflow: hidden; display: flex; justify-content: center; }
+.u-map { 
+  background: #fff; 
+  border-radius: 12px; 
+  padding: 60px 40px; 
+  box-shadow: 0 20px 50px rgba(0, 0, 0, 0.08); 
+  border: 1px solid rgba(196, 151, 58, 0.2); 
+  width: 850px; /* Fixed width for consistent design */
+  transform-origin: top center;
+  transition: transform 0.3s ease;
+}
+
+.u-grid { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 40px; }
 .side-col { display: flex; flex-direction: column; gap: 8px; align-items: center; }
 .chair-pair { display: flex; gap: 8px; }
 .chair { width: 28px; height: 28px; background: var(--ivory); border: 1px solid rgba(196, 151, 58, 0.2); border-radius: 4px; transition: all 0.4s; }
 .chair.active { background: var(--gold) !important; border-color: var(--gold-d); transform: scale(1.4); box-shadow: 0 0 15px rgba(196, 151, 58, 0.6); z-index: 10; }
-.map-dancefloor { display: flex; align-items: center; justify-content: center; font-family: 'Great Vibes', cursive; font-size: clamp(40px, 5vw, 60px); color: var(--gold); opacity: 0.4; text-align: center; line-height: 1; }
-.top-table-wrap { grid-column: 1 / -1; margin-bottom: 60px; text-align: center; }
-.top-chairs { display: flex; gap: 8px; justify-content: center; flex-wrap: wrap; margin-top: 15px; }
+.map-dancefloor { display: flex; align-items: center; justify-content: center; font-family: 'Great Vibes', cursive; font-size: 60px; color: var(--gold); opacity: 0.4; text-align: center; line-height: 1; min-height: 400px;}
+.top-table-wrap { width: 100%; margin-bottom: 60px; text-align: center; }
+.top-chairs { display: flex; gap: 8px; justify-content: center; flex-wrap: wrap; margin-top: 15px; max-width: 600px; margin-left: auto; margin-right: auto;}
 
+/* Mobile Fixes */
 @media(max-width:760px){
   nav{gap:15px;padding:12px 15px;}
   nav a{font-size:8px;letter-spacing:2px;}
   .luxe-program { padding: 40px 30px; margin: 0 10px;}
-  .u-grid { min-width: 600px; gap: 20px; }
-  .chair { width: 20px; height: 20px; }
+  
+  /* The scaling magic */
+  .u-map { transform: scale(0.42); margin-bottom: -480px; padding: 40px 20px; }
+  .u-map-outer { height: auto; }
+  .map-dancefloor { font-size: 50px; }
+  .top-chairs { gap: 6px; }
+}
+
+@media(max-width:400px){
+  .u-map { transform: scale(0.35); margin-bottom: -550px; }
 }
 </style>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
@@ -141,7 +163,7 @@ nav a:hover{color:var(--gold);}
     <p class="h-loc">7:30 PM at Country Club</p>
     <div class="btn-group">
       <a href="https://calendar.google.com/calendar/render?action=TEMPLATE&text=Yousef+%26+Shahd%27s+Wedding&dates=20260509T193000/20260510T000000&ctz=Asia/Amman&details=We+can%27t+wait+to+celebrate+with+you!&location=Country+Club" target="_blank" class="btn">Add to Calendar</a>
-      <a href="https://www.google.com/maps/search/Country+Club" target="_blank" class="btn">Get Directions</a>
+      <a href="https://maps.google.com" target="_blank" class="btn">Get Directions</a>
     </div>
   </div>
   <div class="scroll-cue"><span>Scroll</span><div class="scroll-needle"></div></div>
@@ -286,15 +308,17 @@ nav a:hover{color:var(--gold);}
         Welcome, <b id="guest-name-display"></b>!<br>
         Your seat is highlighted below.
       </div>
-      <div class="u-map">
-        <div class="top-table-wrap">
-          <p style="font-size: 10px; letter-spacing: 3px; text-transform: uppercase; color: var(--gold); margin-bottom: 10px;">Top Table</p>
-          <div class="top-chairs" id="top-row"></div>
-        </div>
-        <div class="u-grid">
-          <div class="side-col" id="left-side"></div>
-          <div class="map-dancefloor">Dance Floor</div>
-          <div class="side-col" id="right-side"></div>
+      <div class="u-map-outer">
+        <div class="u-map">
+          <div class="top-table-wrap">
+            <p style="font-size: 10px; letter-spacing: 3px; text-transform: uppercase; color: var(--gold); margin-bottom: 10px;">Top Table</p>
+            <div class="top-chairs" id="top-row"></div>
+          </div>
+          <div class="u-grid">
+            <div class="side-col" id="left-side"></div>
+            <div class="map-dancefloor">Dance Floor</div>
+            <div class="side-col" id="right-side"></div>
+          </div>
         </div>
       </div>
     </div>
@@ -319,7 +343,7 @@ setInterval(() => {
   document.getElementById('seconds').innerText = Math.floor((d%(1000*60))/1000);
 }, 1000);
 
-// ── RESTORED ORIGINAL RSVP HANDLER ──
+// ── RSVP HANDLER ──
 document.getElementById('wedding-rsvp-form').addEventListener('submit', function(e) {
   e.preventDefault();
   const btn = document.getElementById('submit-btn');
@@ -352,18 +376,11 @@ document.getElementById('wedding-rsvp-form').addEventListener('submit', function
 
 // ── SEATING DATA & LOGIC ──
 const guests = [
-  /* HEAD TABLE - 1 to 16 */
   { name: 'Sumaya Khatib', chairId: 'TOP-1' }, { name: 'Mohammad Hassan', chairId: 'TOP-2' }, { name: 'Nuha Khatib', chairId: 'TOP-3' }, { name: 'Cyrine Kiswani', chairId: 'TOP-4' }, { name: 'Ahmad Muhaisen', chairId: 'TOP-5' }, { name: 'Noor Muhaisen', chairId: 'TOP-6' }, { name: 'Fuad Muhaisen', chairId: 'TOP-7' }, { name: 'Amani Khatib', chairId: 'TOP-8' },
   { name: 'Rania Salameh', chairId: 'TOP-9' }, { name: 'Fawzi Refai', chairId: 'TOP-10' }, { name: 'Waleed Refai', chairId: 'TOP-11' }, { name: 'Nabila Quaider', chairId: 'TOP-12' }, { name: 'Mahmood Refai', chairId: 'TOP-13' }, { name: 'Maison Hakouz', chairId: 'TOP-14' }, { name: 'Fariza Refai (Om Yazan)', chairId: 'TOP-15' }, { name: 'Mohammad Refai (Abu Yazan)', chairId: 'TOP-16' },
-
-  /* LEFT SIDE (Original mapping) */
   { name: 'Shaher Suleiman', chairId: 'L-row-1-out' }, { name: 'Wafaa Suleiman', chairId: 'L-row-2-out' }, { name: 'Mohammad Jamal', chairId: 'L-row-3-out' }, { name: 'Rula Alshahed', chairId: 'L-row-4-out' }, { name: 'Hatem El Shahed', chairId: 'L-row-5-out' }, { name: 'Amal Abu Zayed', chairId: 'L-row-6-out' }, { name: 'Jaber Refai', chairId: 'L-row-7-out' }, { name: 'Aseel Hammoudeh', chairId: 'L-row-8-out' }, { name: 'Salah Qarqash', chairId: 'L-row-9-out' }, { name: 'Wafaa Khalid', chairId: 'L-row-10-out' }, { name: 'Lamees Nazzal', chairId: 'L-row-11-out' }, { name: 'Khaled Awad', chairId: 'L-row-12-out' }, { name: 'Mohammad Okasha', chairId: 'L-row-13-out' }, { name: 'Jumana Hussein', chairId: 'L-row-14-out' }, { name: 'Suzan Muhaisen', chairId: 'L-row-15-out' }, { name: 'Sameeh Sofan', chairId: 'L-row-16-out' },
   { name: 'Dina Sadaqa', chairId: 'L-row-1-in' }, { name: 'Sarah Masaad', chairId: 'L-row-2-in' }, { name: 'Basma Abu Mahfouz', chairId: 'L-row-3-in' }, { name: 'Ihab Khreisheh', chairId: 'L-row-4-in' }, { name: 'Heba abu hashem', chairId: 'L-row-5-in' }, { name: 'Hadeel Haddad', chairId: 'L-row-6-in' }, { name: 'Mohammad Zakaria', chairId: 'L-row-7-in' }, { name: 'Nadia Nasereddin', chairId: 'L-row-8-in' }, { name: 'Lilian Agha', chairId: 'L-row-9-in' }, { name: 'Subhi Qabani', chairId: 'L-row-10-in' }, { name: 'Rania Samara', chairId: 'L-row-11-in' }, { name: 'Basel Zahidah', chairId: 'L-row-12-in' }, { name: 'Touleen Awad', chairId: 'L-row-13-in' }, { name: 'Nirmeen Sofan', chairId: 'L-row-14-in' }, { name: 'Sara Sofan', chairId: 'L-row-15-in' }, { name: 'Tamara Sofan', chairId: 'L-row-16-in' },
-
-  /* INNER RIGHT SIDE (DANCE FLOOR SIDE) */
-  { name: 'Ahmad Salameh', chairId: 'R-row-1-in' }, { name: 'Faris Salameh', chairId: 'R-row-2-in' }, { name: 'Omar Salameh', chairId: 'R-row-3-in' }, { name: 'Farah Salameh', chairId: 'R-row-4-in' }, { name: 'Lina Refai', chairId: 'R-row-5-in' }, { name: 'Omar Qadi', chairId: 'R-row-6-in' }, { name: 'Ata Refai', chairId: 'R-row-7-in' }, { name: 'Anas Refai', chairId: 'R-row-8-in' }, { name: 'Zaid Refai', chairId: 'R-row-9-in' }, { name: 'Kinan AlSafadi', chairId: 'R-row-10-in' }, { name: 'Basel Elayyan', chairId: 'R-row-11-in' }, { name: 'Mohammad Fakhoury', chairId: 'R-row-12-in' }, { name: 'Yazan Obaid', chairId: 'R-row-13-in' }, { name: 'Hamzeh Khater', chairId: 'R-row-14-in' }, { name: 'Omar Jabri', chairId: 'R-row-15-in' }, { name: 'x', chairId: 'R-row-16-in' },
-
-  /* OUTER RIGHT SIDE (WALL SIDE) */
+  { name: 'Ahmad Salameh', chairId: 'R-row-1-in' }, { name: 'Faris Salameh', chairId: 'R-row-2-in' }, { name: 'Omar Salameh', chairId: 'R-row-3-in' }, { name: 'Farah Salameh', chairId: 'R-row-4-in' }, { name: 'Lina Refai', chairId: 'R-row-5-in' }, { name: 'Omar Qadi', chairId: 'R-row-6-in' }, { name: 'Ata Refai', chairId: 'R-row-7-in' }, { name: 'Anas Refai', chairId: 'R-row-8-in' }, { name: 'Zaid Refai', chairId: 'R-row-9-in' }, { name: 'Kinan AlSafadi', chairId: 'R-row-10-in' }, { name: 'Basel Elayyan', chairId: 'R-row-11-in' }, { name: 'Mohammad Fakhoury', chairId: 'R-row-12-in' }, { name: 'Yazan Obaid', chairId: 'R-row-13-in' }, { name: 'Hamzeh Khater', chairId: 'R-row-14-in' }, { name: 'Omar Jabri', chairId: 'R-row-15-in' },
   { name: 'Basima Salameh', chairId: 'R-row-1-out' }, { name: 'Eyad Salameh', chairId: 'R-row-2-out' }, { name: 'Noora Amin', chairId: 'R-row-3-out' }, { name: 'Suha Salameh', chairId: 'R-row-4-out' }, { name: 'Maen Izmigna', chairId: 'R-row-5-out' }, { name: 'Raya Izmigna', chairId: 'R-row-6-out' }, { name: 'Sarah Otoum', chairId: 'R-row-7-out' }, { name: 'Mohammad Refai', chairId: 'R-row-8-out' }, { name: 'Khaled Refai', chairId: 'R-row-9-out' }, { name: 'Abeer Refai (Om Omar)', chairId: 'R-row-10-out' }, { name: 'Alaa Abu Rajoh (Abu Omar)', chairId: 'R-row-11-out' }, { name: 'Ahmad Refai', chairId: 'R-row-12-out' }, { name: 'Ghada Balout', chairId: 'R-row-13-out' }, { name: 'Wafaa Refai', chairId: 'R-row-14-out' }, { name: 'Alaa Abu Rajoh', chairId: 'R-row-15-out' }, { name: 'Eman Abu Khiesha', chairId: 'R-row-16-out' }
 ];
 
@@ -427,7 +444,7 @@ function highlightSeat(guest) {
   const target = document.getElementById(guest.chairId);
   if(target) target.classList.add('active');
   resultWrapper.classList.add('vis');
-  setTimeout(() => { target.scrollIntoView({ behavior: 'smooth', block: 'center' }); }, 300);
+  setTimeout(() => { target.scrollIntoView({ behavior: 'smooth', block: 'center' }); }, 400);
 }
 
 // ── HERO CANVAS ──
